@@ -7,5 +7,6 @@ pages:
   artifacts:
     paths:
     - static
+  publish: static
   only:
   - master
