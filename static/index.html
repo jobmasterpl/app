@@ -29,7 +29,10 @@
 </head>
   <body><div class="apploader hide-loader"><div class="apploader__loader"></div></div>
   <div id="fb-root"></div><script>
-  history.pushState({}, "", '/'); // for vue router
+  history.pushState({}, "", '/'); // for vue-router
+  window.apiUrl = ''
+  window.apiUrl2 = window.apiUrl
+  window.apiAuth = ''
   window.fbAsyncInit = function() {
   FB.init({
     xfbml: true,
