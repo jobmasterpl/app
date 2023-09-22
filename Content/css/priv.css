@@ -1,0 +1,9 @@
+.work-details__desc__details__showMap,
+.work-details__desc__details__showMap + h5 + p + h5 {
+  display: none;
+}
+
+.work-details__desc__details__showMap ~ h5:last-of-type,
+.work-details__desc__details__showMap ~ p:last-of-type {
+  display: none;
+}
