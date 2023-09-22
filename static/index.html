@@ -27,7 +27,9 @@
   <link href="/app/Content/timelinestyle.css" rel="stylesheet"/>
 </head>
   <body><div class="apploader hide-loader"><div class="apploader__loader"></div></div>
-  <div id="fb-root"></div><script>window.fbAsyncInit = function() {
+  <div id="fb-root"></div><script>
+  history.pushState({}, "", '/'); // for vue router
+  window.fbAsyncInit = function() {
   FB.init({
     xfbml: true,
     version: "v9.0",
