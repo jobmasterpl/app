@@ -66,8 +66,8 @@ app.get('/api/OrderList', (req, res, next) => {
           "countryName": "Poland",
           "localCountryName": "Polska"
         },
-        "city": "Janki",
-        "street": "Mszczonowska",
+        "city": "Warszawa Centrum",
+        "street": "Chmielna",
         "houseNumber": "3",
         "postalCode": "05-090",
         "province": {
