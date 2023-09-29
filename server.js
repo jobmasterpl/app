@@ -2,6 +2,7 @@ import express from 'express'
 import fs from 'fs'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { trainings, trainingsData, quizzes, quizAnswers } from './src/MOCKDB/index.mjs'
 
 const app = express()
 app.use(cors())
@@ -35,6 +36,63 @@ app.get('/api/Users/UserData/status', (req, res) => {
   }))
 })
 
+app.get('/api/Training/1', (req, res) => {
+  res.end(JSON.stringify(trainings[0]));
+})
+
+app.get('/api/users/Test/1', (req, res) => {
+
+  res.end(JSON.stringify(quizzes[0]));
+})
+
+app.get('/api/Training/2', (req, res) => {
+  res.end(JSON.stringify(trainings[1]));
+})
+
+app.get('/api/users/Test/2', (req, res) => {
+
+  res.end(JSON.stringify(quizzes[1]));
+})
+
+app.get('/api/Training/3', (req, res) => {
+
+  res.end(JSON.stringify(trainings[2]));
+})
+
+app.get('/api/users/Test/3', (req, res) => {
+
+  res.end(JSON.stringify(quizzes[2]));
+})
+
+app.get('/api/Training/4', (req, res) => {
+
+  res.end(JSON.stringify(trainings[3]));
+})
+
+app.get('/api/users/Test/4', (req, res) => {
+
+  res.end(JSON.stringify(quizzes[3]));
+})
+
+app.get('/api/Training/5', (req, res) => {
+
+  res.end(JSON.stringify(trainings[4]));
+})
+
+app.get('/api/users/Test/5', (req, res) => {
+
+  res.end(JSON.stringify(quizzes[4]));
+})
+
+app.post('/api/Training/Finish', (req, res) => {
+  const { testId, answers } = req.body;
+  const answersParsed = answers.map(({ answerId }) => answerId);
+  const results = quizAnswers[testId - 1].filter((answer, index) => answersParsed[index] === answer).length;
+  const didPass = results >= 3 ? "true" : "false"; 
+  res.end(didPass);
+})
+
+
 app.get('/api/Training/GetUnfinishedCount', (req, res) => {
   return res.end("1")
 })
@@ -47,7 +105,7 @@ app.get('/api/Configs/multiple', (req, res) => {
     "IncRegonFirmy": "147311677",
     "KapitalZakladowy": "10000",
     "NrCertyfikatuAgencjiPracy": "11163"
-}))
+  }))
 })
 app.get('/api/OrderList', (req, res, next) => {
   const list = [
@@ -97,46 +155,6 @@ app.get('/api/OrderList', (req, res, next) => {
   }
   res.json(buildWrappingJson(list))
 })
-
-const training1 = {
-  "id": 13,
-  "name": "Podstawowe Szkolenie BHP",
-  "description": "Szkolenie wymagane w celu aplikacji na zlecenia",
-  "en_Training_Type": {
-    "name": "Podstawowe BHP",
-    "id": 1
-  }
-}
-
-const trainingFinished1 = {
-  ...training1,
-  "finishDate": "2023-08-18T06:16:08",
-}
-
-const trainingsData = {
-  "unfinishedTrainings": [
-    training1,
-    {
-      ...training1,
-      name: "Sprawdzenie wiedzy z języka JavaScript"
-    },
-    {
-      ...training1,
-      name: "Fullstack JS developer quiz"
-    },
-    {
-      ...training1,
-      name: "DB basics quiz"
-    },
-    {
-      ...training1,
-      name: "DB advanced topics quiz"
-    },
-  ],
-  "finishedTrainings": [
-    trainingFinished1,
-  ]
-};
 
 app.get('/api/Training/FirstPage', (req, res) => {
   res.send(trainingsData)
